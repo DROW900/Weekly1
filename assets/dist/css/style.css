@@ -1,0 +1,12 @@
+.album{
+    display: none;
+}
+.card{
+    display: flex;
+    justify-content: center;
+}
+
+img{
+    width: 20rem;
+    height: 20rem;
+}
