@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const {Producto} = require('./Producto')
+const {Producto} = require('./Producto') 
 class Categorias {
 
     constructor(data) {
@@ -14,7 +14,7 @@ class Categorias {
         subCategorias = new Categorias(data)
         return subCategorias
     }
-    /* static getSubCategorias(idCategoria) {
+    static obtenerSubCategorias(idCategoria) {
         let url = `https://api.mercadolibre.com/categories/${idCategoria}`;
         let Categoria
         fetch(url)
@@ -29,7 +29,7 @@ class Categorias {
                 console.log(error)
                 console.error('No hay Categorias || TIME OUT');
             })
-    } */
+    }
     
     static mostrarCategorias() {
         let elemento
@@ -37,7 +37,7 @@ class Categorias {
             for (let index = 0; index < this.info.children_categories.length; index++) {
                 //console.log(this.info.children_categories[index]);
                 let nombreCategoria = document.getElementById('categorias');
-                nombreCategoria.innerHTML += '<button  id="' + this.info.children_categories[index].id + '", onclick="Categorias.verSubcategorias(this.id)",type= "button">' + this.info.children_categories[index].name + '</button>'
+                nombreCategoria.innerHTML += '<button  id="' + this.info.children_categories[index].id + '", class="btn btn-primary my-2" ,onclick="Categorias.verSubcategorias(this.id)",type= "button">' + this.info.children_categories[index].name + '</button>'
             }
             elemento = document.getElementById('categorias').style.display="block";
             elemento = document.getElementById('lista').style.display="none";
@@ -59,8 +59,10 @@ class Categorias {
     }
 
     static verSubcategorias(id) {
-        Producto.getProductosPorId(id);
+        console.log('Hola')
+        Producto.obtenerProductosPorId(id);
     }
 
 }
-module.exports={Categorias}
+/* Categorias.obtenerSubCategorias('MLM1648') */
+module.exports={Categorias} 

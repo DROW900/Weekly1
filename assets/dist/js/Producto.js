@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+const fetch = require('node-fetch') 
 class Producto {
 
     constructor(lista) {
@@ -14,7 +14,7 @@ class Producto {
         return Productos; 
     }
 
-/*     static getProductosPorId(idProducto) {
+    static obtenerProductosPorId(idProducto) {
         let url = `https://api.mercadolibre.com/sites/MLM/search?category=${idProducto}`;
         let Productos
         fetch(url)
@@ -29,7 +29,7 @@ class Producto {
                 console.log(error)
                 console.error('No hay Productos || TIME OUT');
             })
-    } */
+    } 
 
     static getTendencias(id){
         let url = `https://api.mercadolibre.com/trends/MLM/${id}`;

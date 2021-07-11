@@ -8,8 +8,14 @@ html{
     display: flex;
     justify-content: center;
 }
-
-img{
-    width: 20rem;
-    height: 20rem;
+.botones_carrito{
+    margin-top: 5rem;
+}
+.navbar img{
+    size: 1rem;
+    margin-right: 5px;
+}
+.navbar a{
+    text-decoration: none;
+    color: white;
 }
