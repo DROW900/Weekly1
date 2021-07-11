@@ -1,10 +1,20 @@
+const fetch = require('node-fetch')
+const {Producto} = require('./Producto')
 class Categorias {
 
-    constructor(categorias) {
-        this.categorias = categorias;
+    constructor(data) {
+        this.subCategorias = data;
     }
 
-    static getSubCategorias(idCategoria) {
+    static async getSubCategorias(idCategoria){
+        let subCategorias
+        const url = `https://api.mercadolibre.com/categories/${idCategoria}`
+        const resp = await fetch(url);
+        const data = await resp.json();
+        subCategorias = new Categorias(data)
+        return subCategorias
+    }
+    /* static getSubCategorias(idCategoria) {
         let url = `https://api.mercadolibre.com/categories/${idCategoria}`;
         let Categoria
         fetch(url)
@@ -19,8 +29,8 @@ class Categorias {
                 console.log(error)
                 console.error('No hay Categorias || TIME OUT');
             })
-    }
-
+    } */
+    
     static mostrarCategorias() {
         let elemento
         if(this.bandera == false){
@@ -36,7 +46,14 @@ class Categorias {
         elemento = document.getElementById('categorias').style.display="block";
         elemento = document.getElementById('lista').style.display="none";
     }
-
+    async obtenerIdentificadores(){
+        let subCategorias = []
+        for(let i = 0; i < this.subCategorias.children_categories.length; i++){
+            subCategorias.push(this.subCategorias.children_categories[i].id)
+        }
+        console.log(subCategorias)
+        return subCategorias
+    }
     static mostrarTendencias() {
         Producto.getTendencias('MLM1648')
     }
@@ -46,4 +63,4 @@ class Categorias {
     }
 
 }
-Categorias.getSubCategorias('MLM1648'); //computadoras
+module.exports={Categorias}

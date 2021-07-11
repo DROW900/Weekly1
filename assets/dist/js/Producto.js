@@ -1,10 +1,20 @@
+const fetch = require('node-fetch')
 class Producto {
 
-    constructor(Productos) {
-        this.Productos = Productos;
+    constructor(lista) {
+        this.productos = lista;
     }
 
-    static getProductosPorId(idProducto) {
+    static async getProductosPorId(idSubCategoria){
+        let url = `https://api.mercadolibre.com/sites/MLM/search?category=${idSubCategoria}`;
+        let Productos
+        const resp = await fetch(url);
+        const data = await resp.json();
+        Productos = new Producto(data);
+        return Productos; 
+    }
+
+/*     static getProductosPorId(idProducto) {
         let url = `https://api.mercadolibre.com/sites/MLM/search?category=${idProducto}`;
         let Productos
         fetch(url)
@@ -19,7 +29,7 @@ class Producto {
                 console.log(error)
                 console.error('No hay Productos || TIME OUT');
             })
-    }
+    } */
 
     static getTendencias(id){
         let url = `https://api.mercadolibre.com/trends/MLM/${id}`;
@@ -60,5 +70,5 @@ class Producto {
        let elemento = document.getElementById('album').style.display="block";
     }
 }
-
+module.exports={Producto}
 //SubCategorias.getTendenciasPorSubcategoria('MLA430598');
